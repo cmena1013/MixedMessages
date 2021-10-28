@@ -4,57 +4,50 @@ var _ = require('lodash');
 var fs = require('fs');
 var text = fs.readFileSync('./Tarot.txt', 'utf-8');
 var textByLine = text.split('\n');
+var tarotCards = [];
 
 // Combine for loop into TarotCard func. Pass str array loop, then assign.
-function TarotCard (name, pastUpright, pastReverse, presentUpright, presentReverse, futureUpright, futureReverse) {
-    this.name = name;
-    this.pastUpright = pastUpright;
-    this.pastReverse = pastReverse;
-    this.presentUpright = presentUpright;
-    this.presentReverse = presentReverse;
-    this.futureUpright = futureUpright;
-    this.futureReverse = futureReverse;
-}
+function TarotCard (textArray) {
+    this.name;
+    this.pastUpright;
+    this.pastReverse;
+    this.presentUpright;
+    this.presentReverse;
+    this.futureUpright;
+    this.futureReverse;
+    let fileArray = [];
 
-//console.log(textByLine);
-// Loop lines to separate key pairs
-let fileArray = [];
-let name;
-let pastUpright;
-let pastReverse;
-let presentUpright;
-let presentReverse;
-let futureUpright;
-let futureReverse;
-for (let i = 0; i < textByLine.length; i++) {
-    //console.log(textByLine[i].split(':'));
-    fileArray.push(textByLine[i].split(':'));
-    console.log(fileArray[0][0]);
+    for (let i = 0; i < textArray.length; i++ ) {
+        fileArray.push(textArray[i].split(':'));
+    }
 
-    switch (textByLine[i][0]) {
-        case 'name':
-            name = textByLine[i][1];
-            break;
-        case 'pastUpright':
-            pastUpright = textByLine[i][1];
-            break;
-        case 'pastReverse':
-            pastReverse = textByLine[i][1];
-            break;
-        case 'presentUpright':
-            presentUpright = textByLine[i][1];
-            break;
-        case 'presentReverse':
-            presentReverse = textByLine[i][1];
-            break;
-        case 'futureUpright':
-            futureUpright = textByLine[i][1];
-             break;
-        case 'futureReverse':
-            futureReverse = textByLine[i][1];
-            break;
+    for (i = 0; i < fileArray.length; i++) {
+        switch (fileArray[i][0]) {
+            case 'name':
+                this.name = fileArray[i][1];
+                tarotCards.push(_.camelCase(fileArray[i][1]));
+                break;
+            case 'pastUpright':
+                this.pastUpright = fileArray[i][1];
+                break;
+            case 'pastReverse':
+                this.pastReverse = fileArray[i][1];
+                break;
+            case 'presentUpright':
+                this.presentUpright = fileArray[i][1];
+                break;
+            case 'presentReverse':
+                this.presentReverse = fileArray[i][1];
+                break;
+            case 'futureUpright':
+                this.futureUpright = fileArray[i][1];
+                break;
+            case 'futureReverse':
+                this.futureReverse = fileArray[i][1];
+                break;
+        }
     }
 }
-console.log(name);
-//_.camelCase(name) = new TarotCard (name, pastUpright, pastReverse, presentUpright, presentReverse, futureUpright, futureReverse)
-//console.log(theFool);
+
+let theFool = new TarotCard(textByLine);
+console.log(tarotCards);
