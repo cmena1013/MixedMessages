@@ -19,7 +19,7 @@ while (cardsDrawn.length < 3){
 }
 
 let pastPresentFuture = [];
-// Read files
+// Build prediction
 for (let j = 0; j < cardsDrawn.length; j++) {
     var text = fs.readFileSync(`${tarotFolder}/${tarotFiles[cardsDrawn[j]]}`, 'utf-8');
     var textByLine = text.split('\n');
